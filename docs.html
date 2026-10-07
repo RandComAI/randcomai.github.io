@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RandComp Studio Documentation</title>
+<meta name="description" content="Install RandComp Studio, organize focused command-line AI agent sessions as one coordinated team, and operate them from the UI, CLI, or MCP.">
+<link rel="alternate" hreflang="en" href="docs.html">
+<link rel="alternate" hreflang="zh-CN" href="zh/docs.html">
+<style>
+:root {
+  --bg:#fff; --surface:#f7f7f5; --surface-2:#efefec; --ink:#171717;
+  --muted:#5f6360; --faint:#8b8e8c; --line:#e5e5e2; --green:#10a37f;
+  --green-soft:#e3f5ef; --code:#202123; --code-ink:#f7f7f5;
+  --shadow:0 14px 40px rgba(0,0,0,.07);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.68 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:var(--green);text-decoration-thickness:1px;text-underline-offset:3px}
+code,pre{font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace}
+.early-banner{min-height:34px;padding:7px 18px;display:flex;align-items:center;justify-content:center;text-align:center;background:#f1faf7;border-bottom:1px solid #d8eee7;color:#315d52;font-size:12px}
+.early-banner a{margin-left:4px;color:#087f63;font-weight:700}
+.topbar{height:68px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.92);backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}
+.topbar-inner{width:min(1220px,calc(100% - 40px));height:100%;margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:700}
+.mark{width:28px;height:28px;border-radius:8px;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px}
+.top-links{display:flex;gap:22px;align-items:center;font-size:14px;font-weight:600}
+.top-links a{color:var(--muted);text-decoration:none}.top-links a:hover{color:var(--ink)}
+.docs-shell{width:min(1220px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:240px minmax(0,820px);gap:72px;align-items:start}
+.sidebar{position:sticky;top:96px;padding:38px 0 60px;height:calc(100vh - 96px);overflow:auto}
+.sidebar p{margin:0 0 12px;color:var(--faint);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.sidebar a{display:block;padding:7px 10px;margin-left:-10px;border-radius:8px;color:var(--muted);font-size:14px;text-decoration:none}
+.sidebar a:hover{background:var(--surface);color:var(--ink)}
+.sidebar .group{margin-top:24px}
+main{padding:76px 0 120px;min-width:0}
+.hero{padding:0 0 72px;border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--green);font-size:14px;font-weight:700;margin:0 0 14px}
+h1,h2,h3{letter-spacing:-.035em;line-height:1.12}
+h1{font-size:clamp(46px,6vw,72px);margin:0 0 22px;max-width:10ch}
+h2{font-size:36px;margin:0 0 20px;padding-top:20px}
+h3{font-size:23px;margin:38px 0 12px}
+.hero>p:last-child{color:var(--muted);font-size:20px;max-width:660px;margin:0}
+.doc-section{padding:72px 0;border-bottom:1px solid var(--line);scroll-margin-top:74px}
+.doc-section>p,.doc-section>ul,.doc-section>ol{max-width:720px}
+p{margin:0 0 18px}.muted{color:var(--muted)}
+.callout{margin:26px 0;padding:22px 24px;border-radius:16px;background:var(--green-soft);border:1px solid #c8e9df}
+.callout strong{display:block;margin-bottom:5px}.callout p{margin:0;color:#245f50}
+.warning{background:#fff7e8;border-color:#f0dfb8}.warning p{color:#6d5626}
+.steps{counter-reset:step;display:grid;gap:14px;margin:28px 0}
+.step{counter-increment:step;display:grid;grid-template-columns:36px 1fr;gap:16px;padding:22px;border-radius:16px;background:var(--surface)}
+.step:before{content:counter(step);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--green-soft);color:var(--green);font-weight:700;font-size:13px}
+.step h3{font-size:18px;margin:2px 0 6px;letter-spacing:-.02em}.step p{margin:0;color:var(--muted)}
+.start-paths{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0}
+.start-path{min-width:0;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--surface)}
+.start-path h3{margin:0 0 8px;font-size:22px}.start-path>p{color:var(--muted)}
+.start-path pre{margin:16px 0;padding:16px;font-size:12px}.start-path .requirement{color:var(--ink);padding:12px 14px;border-left:3px solid var(--green);background:#fff}
+pre{position:relative;margin:20px 0;padding:22px 24px;border-radius:14px;background:var(--code);color:var(--code-ink);font-size:13px;line-height:1.75;overflow:auto}
+p code,li code,td code{padding:2px 6px;border-radius:5px;background:var(--surface-2);font-size:.88em}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:26px 0}
+.card{padding:24px;border-radius:16px;background:var(--surface)}
+.card h3{font-size:18px;margin:0 0 8px}.card p{margin:0;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:24px 0;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:14px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--faint)}
+td:first-child{font-weight:650;white-space:nowrap}
+.command{margin:14px 0 24px;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.command pre{margin:0;border-radius:0;padding:15px 18px}
+.command p{margin:0;padding:14px 18px;color:var(--muted);font-size:14px;background:var(--surface)}
+.command ul{margin:0;padding:12px 38px 16px;background:var(--surface);color:var(--muted);font-size:14px}
+.command li+li{margin-top:6px}
+.option-note{font-size:14px;color:var(--muted)}
+.on-this-page{display:none}
+footer{padding:36px 0;color:var(--faint);font-size:13px}
+@media(max-width:900px){.docs-shell{grid-template-columns:1fr;gap:0}.sidebar{display:none}.on-this-page{display:block;margin:22px 0;padding:18px;border-radius:14px;background:var(--surface)}main{padding-top:52px}.cards,.start-paths{grid-template-columns:1fr}}
+@media(max-width:560px){.topbar-inner,.docs-shell{width:min(100% - 28px,820px)}.top-links a:first-child{display:none}h1{font-size:44px}.doc-section{padding:56px 0}h2{font-size:31px}.step{grid-template-columns:30px 1fr;padding:18px}table{display:block;width:100%;max-width:100%;overflow-x:auto}td:first-child{white-space:normal}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="early-banner" role="status">Early preview — expect a few bugs. <a href="https://github.com/RandComAI">Visit RandComAI on GitHub →</a></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html"><span class="mark">R</span><span>RandComp Studio</span></a>
+    <nav class="top-links" aria-label="Documentation navigation"><a href="index.html">Overview</a><a href="#quick-start">Quick start</a><a href="#cli-reference">CLI reference</a><a href="zh/docs.html" lang="zh-CN">中文</a></nav>
+  </div>
+</header>
+
+<div class="docs-shell">
+  <aside class="sidebar" aria-label="Documentation sections">
+    <p>Start here</p>
+    <a href="#overview">Overview</a>
+      <a href="#quick-start">Quick start</a>
+      <a href="#mcp-guide">AI session over MCP</a>
+    <a href="#first-task">Run your first task</a>
+    <div class="group"><p>Use RandComp Studio</p>
+      <a href="#mental-model">Mental model</a>
+      <a href="#ui-guide">UI guide</a>
+      <a href="#cli-guide">CLI guide</a>
+      <a href="#cli-reference">CLI reference</a>
+      <a href="#roles">Roles and runners</a>
+    </div>
+    <div class="group"><p>Operate safely</p>
+      <a href="#files">Files and privacy</a>
+      <a href="#cost-control">Cost control</a>
+      <a href="#troubleshooting">Troubleshooting</a>
+      <a href="#uninstall">Move or uninstall</a>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero" id="overview">
+      <p class="eyebrow">Documentation</p>
+      <h1>Run separate AI sessions as one coordinated team.</h1>
+      <p>One all-purpose session accumulates every job and an ever-growing context. RandComp Studio lets you split research, product, implementation, and review into focused role sessions, then keeps their tasks, messages, dependencies, and results connected. It does not replace your AI agent or skill ecosystem.</p>
+    </section>
+
+    <nav class="on-this-page" aria-label="On this page"><strong>Start here:</strong> <a href="#quick-start">Quick start</a> · <a href="#mcp-guide">AI session over MCP</a> · <a href="#first-task">First project</a> · <a href="#ui-guide">UI</a> · <a href="#cli-reference">CLI</a></nav>
+
+    <section class="doc-section" id="quick-start">
+      <p class="eyebrow">Get started</p>
+      <h2>Quick start</h2>
+      <p>RandComp Studio works with the AI tools you choose. Install the app, then operate the same local team from its desktop board or from an MCP-capable AI session. Claude Code, Codex, and Kimi Code are the bundled preview integrations, not the product boundary. Other configured runners are listed honestly when present, but their presence is not a claim of verified support.</p>
+
+      <div class="start-paths">
+        <article class="start-path">
+          <p class="eyebrow">Path 1</p>
+          <h3>Desktop app</h3>
+          <p class="requirement"><strong>Requires:</strong> Apple silicon and macOS 11 or newer. Python and tmux are included.</p>
+          <ol>
+            <li>Download <code>RandCompStudio-0.1.1.dmg</code>.</li>
+            <li>Open it and drag RandComp Studio to Applications.</li>
+            <li>Open the app and choose where your company should live.</li>
+          </ol>
+          <p>Version, size, and SHA-256 are stamped into the landing page by the build; verify the hash shown there before opening the image.</p>
+        </article>
+        <article class="start-path" id="mcp-guide">
+          <p class="eyebrow">Path 2</p>
+          <h3>Inside your AI session</h3>
+          <p class="requirement"><strong>Requires:</strong> the RandComp Studio app, an AI client that supports a local MCP server, and <code>randcomp</code> on PATH. In the app, choose <em>RandComp Studio → Install the randcomp command in PATH</em> first.</p>
+<pre>claude mcp add -s user randcomp-studio -- randcomp mcp</pre>
+          <p>The command above is the Claude Code example. <code>-s user</code> makes it available in every project; without it the server is registered only for the folder you ran it in. Other MCP clients register the same <code>randcomp mcp</code> process through their own local-server settings.</p>
+          <p>Your AI session can open tasks, hire roles, start agents, send work, and read results. The app shows the same board and terminals whenever you open it.</p>
+          <p>Registering also adds four RandComp Studio <a href="#mcp-prompts">slash commands</a> to that client.</p>
+          <p>This is a local MCP process over stdin and stdout—not a hosted server. RandComp Studio adds no account or API key. Your AI client still talks to its own vendor under that client’s settings.</p>
+        </article>
+      </div>
+
+      <h3>First-run questions</h3>
+      <p>The company folder holds roles, tasks, decisions, status, messages, and results as ordinary files. It is not necessarily the codebase where agents work. You choose project folders separately for each task.</p>
+      <p>If more than one configured runner is available, RandComp Studio asks which one should run coordinators. It checks whether the selected runner appears signed in, but never reads or stores the credential value and never signs in for you.</p>
+      <p>When creating a v2 project, you can keep the machine default, choose another available configured runner as the project default, and optionally override individual roles. The order is role override, project default, then machine default; changing a live agent in its inspector remains an explicit session override.</p>
+    </section>
+
+    <section class="doc-section" id="first-task">
+      <p class="eyebrow">Five minutes</p>
+      <h2>Run your first project</h2>
+      <h3>From the UI</h3>
+      <ol>
+        <li>Run <code>randcomp</code> to open the company window.</li>
+        <li>Choose <strong>Start a project</strong> and describe what you want in one sentence.</li>
+        <li>RandComp Studio opens the project and tells its coordinator what you asked.</li>
+        <li>Your coordinator turns the sentence into a plan of focused tasks and hires the helpers to do them.</li>
+        <li>Watch each task: who is on it, what it produced, and what needs you. Send the next request from the composer whenever you want.</li>
+      </ol>
+
+      <h3>From the CLI</h3>
+<pre>randcomp project create "Launch a small online store with a checkout" --runner kimi
+randcomp project list
+randcomp project ask PROJECT_ID "Add a gift-card page to the checkout"
+randcomp project show PROJECT_ID</pre>
+      <p>Copy <code>PROJECT_ID</code> from <code>randcomp project list</code>. The ask is handed to the project's real coordinator session; planning the tasks is its judgment, not the CLI's. The same project commands work over SSH on the machine where the company lives.</p>
+      <p>The classic task-centric surface (<code>randcomp task create</code> and friends) is unchanged and still works for the company-level task board.</p>
+
+      <h3>From an AI session over MCP</h3>
+      <p>After registering the server, ask your AI session to create and manage the work through RandComp Studio rather than its own temporary subagents. The AI client chooses the MCP tools, while RandComp Studio owns the durable project, coordinator, helper agents, sessions, messages, and results underneath.</p>
+<pre>Use RandComp Studio to open a project for this work.
+Have the coordinator plan it and Developer implement it with QA reviewing.
+Keep the project and its helpers visible on the RandComp Studio board.</pre>
+      <p>The MCP server publishes the project tools as <code>v2_project_create</code>, <code>v2_project_list</code>, <code>v2_project_show</code>, <code>v2_project_ask</code>, <code>v2_project_finish</code>, and <code>v2_project_reopen</code>, plus <code>v2_task_*</code>, <code>v2_agent_*</code>, and <code>v2_result_*</code> tools — alongside the classic company-level tools. Asking in your own words like above is still the main path. The four commands below are shortcuts for the sentences you would otherwise retype.</p>
+
+      <h3 id="mcp-prompts">Slash commands</h3>
+      <p>RandComp Studio publishes four prompts. Your client turns each one into a command you can pick at the start of a message. Claude Code 2.1.233 spells them like this, and lists every connected server’s commands under <code>/mcp</code>:</p>
+      <table>
+        <thead><tr><th>Type</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td><code>/mcp__randcomp-studio__catch-me-up</code></td><td>Where the company stands: every task, who is on it, what is waiting on you, and what has gone quiet. Reads only.</td></tr>
+          <tr><td><code>/mcp__randcomp-studio__what-came-out TASK_ID</code></td><td>What one task produced: what it was opened for, the outcome its coordinator wrote, and the complete path of every file. Reads only, long after the sessions are over.</td></tr>
+          <tr><td><code>/mcp__randcomp-studio__start-work WHAT YOU WANT DONE</code></td><td>Opens a task for that sentence and lets its coordinator hire the roles the work needs. Starting agents spends money; leave the sentence off and you are asked for it.</td></tr>
+          <tr><td><code>/mcp__randcomp-studio__check-on AGENT_ID</code></td><td>What one agent has been doing in its own words, and whether it is waiting on you. Reads only.</td></tr>
+        </tbody>
+      </table>
+      <p>The prompt names themselves are <code>catch-me-up</code>, <code>what-came-out</code>, <code>start-work</code>, and <code>check-on</code>. Other MCP clients offer the same four under their own spelling; check that client’s prompt or command list rather than assuming the form above.</p>
+      <p>Anything you type after the command is the command’s one value—a task ID, an agent ID, or the work you want done.</p>
+      <div class="callout"><strong>A command hands your session a starting point, not an answer.</strong><p>Each one returns text that says which RandComp Studio tools to call and how to read what comes back. Your session then makes those calls, under your client’s own approval settings, so nothing is opened, started, or stopped until you allow the tool call itself.</p></div>
+    </section>
+
+    <section class="doc-section" id="mental-model">
+      <p class="eyebrow">Core concepts</p>
+      <h2>The mental model</h2>
+      <table>
+        <thead><tr><th>Concept</th><th>What it means</th></tr></thead>
+        <tbody>
+          <tr><td>Company</td><td>The durable folder containing your roles, tasks, decisions, messages, status, and produced artifacts.</td></tr>
+          <tr><td>Project folder</td><td>The codebase or working folder an agent operates in. It is selected per task and can be outside the company.</td></tr>
+          <tr><td>Project</td><td>The primary unit of work in the current app: one sentence about what you want, a coordinator that plans it into focused tasks, and the helpers hired to do them. Projects persist on disk and survive restarts.</td></tr>
+          <tr><td>Task</td><td>One focused piece of a project's plan, with its assigned helpers, live state, outcome, and files. The company-level classic task board also exists for work you dispatch directly.</td></tr>
+          <tr><td>Agent</td><td>One hired instance of a role on exactly one task. Two tasks using Developer get two different Developer agents.</td></tr>
+          <tr><td>Session</td><td>One running terminal for an agent. Sessions cost money; agents and their history remain when sessions stop.</td></tr>
+          <tr><td>Role</td><td>A reusable definition such as Developer, QA, or Market Analyst. Roles live in the helper library; they do not run by themselves.</td></tr>
+          <tr><td>Runner</td><td>The installed command-line AI agent that executes an agent. Claude Code, Codex, and Kimi Code are the bundled definitions in this preview, not the limit of the runner model — any CLI that runs in a terminal can be one.</td></tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>Roles are the company; agents are the people on the work.</strong><p>The role library has no live graph. Relationships and arrows only make sense inside one task, between the agent instances hired onto it.</p></div>
+    </section>
+
+    <section class="doc-section" id="ui-guide">
+      <p class="eyebrow">Graphical interface</p>
+      <h2>Use the UI</h2>
+      <p>Run <code>randcomp</code> with nothing after it. It opens your company in a window of its own, served only to <code>127.0.0.1</code>.</p>
+      <div class="cards">
+        <article class="card"><h3>Projects</h3><p>Start a project with one sentence, send requests to its coordinator, and watch the plan of focused tasks form — every task shows who is on it and what it produced.</p></article>
+        <article class="card"><h3>Library</h3><p>Browse the reusable helper library, read role definitions, and import a definition you already have.</p></article>
+        <article class="card"><h3>Agent sessions</h3><p>Open a helper's live session, read its terminal, change which AI tool it runs on, or stop the session without deleting the agent.</p></article>
+        <article class="card"><h3>History and settings</h3><p>Review recorded company activity, choose light or dark appearance, pick your language, and replay the first-run tour.</p></article>
+      </div>
+
+      <h3>Read task state</h3>
+      <p>A task’s state is derived from its agents rather than stored as a guess. <strong>Needs you</strong> means an agent recorded a blocker or request. <strong>Working</strong> means current work is active. <strong>Done</strong> means the task was finished. A quiet or unknown agent is explained with its cause instead of being silently called blocked.</p>
+
+      <h3>Talk to an agent</h3>
+      <p>Open an agent from its task, read its current terminal output, and send a line. “Open in a terminal” joins the actual tmux session; detach with <code>Ctrl-B</code>, then <code>D</code>, and the agent keeps working.</p>
+    </section>
+
+    <section class="doc-section" id="cli-guide">
+      <p class="eyebrow">Command line</p>
+      <h2>Use the CLI</h2>
+      <p><code>randcomp</code> and <code>randcomp-studio</code> are the same program; <code>randcomp</code> is shorter to type. Every command names the thing first and the action after — <code>randcomp task list</code>, <code>randcomp task results TASK_ID</code>, <code>randcomp task finish TASK_ID</code>. The plural spellings (<code>randcomp tasks ls</code>, <code>randcomp agents ID logs</code>) still work and always will; the singular ones are what <code>randcomp help</code> teaches.</p>
+
+      <h3>Inspect the whole company</h3>
+<pre>randcomp status
+randcomp task list
+randcomp agent list</pre>
+      <p><code>status</code> is the concise company summary: which program runs your agents and whether it is signed in, how many tasks and agents there are, and one line for each. <code>randcomp task list</code> says why each task is in the state it is in; <code>randcomp agent list</code> says what each agent is doing.</p>
+
+      <h3>Use another company</h3>
+<pre>randcomp task list --company ~/Companies/acme
+randcomp --company ~/Companies/new-company</pre>
+      <p><code>--company PATH</code> works across the command surface. Naming a path that does not exist creates a company there. It does not change the project folder agents work in.</p>
+    </section>
+
+    <section class="doc-section" id="cli-reference">
+      <p class="eyebrow">Reference</p>
+      <h2>Complete CLI reference</h2>
+      <p>This reference follows the public parsers in the current source. Brackets mean optional input. Every command also accepts <code>-h</code> or <code>--help</code>; <code>randcomp help</code> prints the top-level map.</p>
+
+      <h3>Values and shared behavior</h3>
+      <table>
+        <thead><tr><th>Value</th><th>Where it comes from</th></tr></thead>
+        <tbody>
+          <tr><td><code>TASK_ID</code></td><td>The short slug beside a task in <code>randcomp task list</code>, or enough of its long name to match exactly one task.</td></tr>
+          <tr><td><code>AGENT_ID</code></td><td>The ID in brackets after a role in <code>randcomp agent list</code>. A role name also works when only one agent has that role.</td></tr>
+          <tr><td><code>RESULT_FILE_PATH</code></td><td>The complete path printed under “what it produced” by <code>randcomp task results TASK_ID</code>.</td></tr>
+                    <tr><td><code>ADDRESS</code></td><td>A hired agent ID or an unambiguous role name.</td></tr>
+        </tbody>
+      </table>
+      <p><code>--company PATH</code> is accepted by the task, agent, role and status commands, and by the bare command that opens the window. It selects the folder holding <code>roles/</code> and <code>coordination/</code>; it does not select an agent’s project folder. The remembered first-run company is the default. A named path that does not exist is initialized as a company. On <code>role</code> commands the flag may appear before or after the verb.</p>
+
+      <h3>MCP server</h3>
+      <div class="command"><pre>randcomp mcp [--company PATH]</pre><p>Speak Model Context Protocol over stdin and stdout so a local MCP client can read and drive the company. Register it with <code>claude mcp add -s user randcomp-studio -- randcomp mcp</code> rather than running it by hand. It publishes tools the client calls and the four <a href="#mcp-prompts">prompts</a> the client shows as slash commands. <code>--company</code> selects a company other than the remembered default. There is no network listener, hosted service, RandComp Studio account, or API key.</p></div>
+
+      <h3>Projects</h3>
+      <p>The project surface is the current app's primary model: a project holds one sentence of intent, a coordinator, and the plan of focused tasks the coordinator made. The commands below are the complete project grammar; every one also accepts <code>--company PATH</code>.</p>
+      <div class="command"><pre>randcomp project create TEXT... [--title WORDS] [--runner NAME]</pre><p>Open a project for that sentence. <code>--runner</code> sets the project's default AI tool (for example <code>kimi</code>, <code>claude</code>, or <code>codex</code>); otherwise the machine default is used.</p></div>
+      <div class="command"><pre>randcomp project list [--json]</pre><p>Every project, its state, and how many tasks it holds.</p></div>
+      <div class="command"><pre>randcomp project show PROJECT_ID</pre><p>One project's detail: its request history, the coordinator's state, and its plan.</p></div>
+      <div class="command"><pre>randcomp project ask PROJECT_ID TEXT...</pre><p>Write a request against the project. Its coordinator session is woken — or hired and launched — and reads it; planning the tasks is the coordinator's own judgment.</p></div>
+      <div class="command"><pre>randcomp project finish PROJECT_ID
+randcomp project reopen PROJECT_ID</pre><p><code>finish</code> closes the project and stops its agents; <code>reopen</code> opens it again without starting anything.</p></div>
+      <p>Inside a project, tasks and agents answer to <code>randcomp task create --project PROJECT_ID</code>, <code>randcomp task list --project PROJECT_ID</code>, and <code>randcomp agent list --project PROJECT_ID</code>; the singular verbs with a project flag are the v2 grammar, while their plural legacy spellings keep their classic meaning.</p>
+
+      <h3>Tasks</h3>
+      <div class="command"><pre>randcomp task create TEXT... [OPTIONS]</pre><p>Open a task, start its coordinator, and let the coordinator hire the roles it needs.</p><ul>
+        <li><code>--name WORDS</code> sets the display name and the basis of the short task slug. The request text is the default.</li>
+        <li><code>--in PATH</code> sets the project folder every agent opens. The last project folder used is the default.</li>
+        <li><code>--only ROLE,ROLE</code> limits which roles the coordinator may consider and remembers that narrowing. <code>--only all</code> clears it.</li>
+        <li><code>--with-role ROLE</code> hires one role you chose instead of asking the coordinator to choose it.</li>
+        <li><code>--let-it-work-without-asking</code> requests the runner’s unattended permission mode. This lowers an approval boundary; <code>randcomp role list</code> prints what the runner permits.</li>
+        <li><code>--anyway</code> confirms the new spend when sessions are already running. Without it, RandComp Studio reports what is running and stops.</li>
+      </ul></div>
+      <div class="command"><pre>randcomp task list [--json] [--company PATH]</pre><p>Print the company org chart: every task, derived state, agent, and ready-to-run command. <code>--json</code> returns the same listing as structured JSON.</p></div>
+      <div class="command"><pre>randcomp task results TASK_ID [--json] [--company PATH]</pre><p>Show what was requested, the coordinator’s outcome, participants, and complete paths of produced files. The task may be omitted when it can be resolved interactively. It lists files rather than printing their contents. <code>--json</code> produces structured output.</p></div>
+      <div class="command"><pre>randcomp task show RESULT_FILE_PATH [--company PATH]</pre><p>Print one produced document whole. This is the same command as the one above: anything containing a directory separator is read as a path to a produced file, and anything else as the name of a task. Use the exact path printed under “what it produced”.</p></div>
+      <div class="command"><pre>randcomp task finish TASK_ID [--yes] [--company PATH]</pre><p>Close a task and stop every agent session on it. In a terminal it names the sessions and asks first. <code>--yes</code> answers in advance; non-interactive scripts are never prompted. Agents and history remain.</p></div>
+      <div class="command"><pre>randcomp task reopen TASK_ID [--company PATH]</pre><p>Open a finished task again. It deliberately starts no sessions; list the old agents and run <code>randcomp agent start AGENT_ID</code> only for those you want working.</p></div>
+
+      <h3>Agents</h3>
+      <div class="command"><pre>randcomp agent list TASK_ID [--json] [--company PATH]
+randcomp agent list [--json] [--company PATH]</pre><p>List the agents on one task, or every agent in the company when no task is named. <code>--json</code> returns structured output.</p></div>
+      <div class="command"><pre>randcomp agent logs AGENT_ID [--company PATH]</pre><p>Read the agent’s words: full live scrollback while it runs, or its saved conversation after it stops. This is not the reusable role definition.</p></div>
+      <div class="command"><pre>randcomp agent send AGENT_ID TEXT... [--company PATH]</pre><p>Write a line to an agent. It enters the live session, or waits in the agent’s inbox when no session is running.</p></div>
+      <div class="command"><pre>randcomp agent attach AGENT_ID [--print-the-command] [--company PATH]</pre><p>Join the tmux session in this terminal; detach with <code>Ctrl-B</code>, then <code>D</code>. <code>--print-the-command</code> prints the join command without running it, for another terminal or script.</p></div>
+      <div class="command"><pre>randcomp agent start AGENT_ID [--company PATH]
+randcomp agent stop AGENT_ID [--company PATH]</pre><p><code>start</code> gives the durable agent a session, resuming its identity and history. <code>stop</code> ends only that session; the agent stays and can start again.</p></div>
+
+      <h3>Role library and hiring</h3>
+      <div class="command"><pre>randcomp role add ROLE [OPTIONS]</pre><p>Put one of this company’s roles on a task. Hiring records the instance; it does not necessarily launch it. <code>role hire</code> is the older spelling.</p><ul>
+        <li><code>--assignment WORDS...</code> records this instance’s one piece of work; it may be added later.</li>
+        <li><code>--in PATH</code> sets the project folder the agent opens. The company folder is the default. The legacy hidden spelling <code>--project PATH</code> is equivalent.</li>
+        <li><code>--task SLUG</code> binds the agent to one task’s coordination-directory slug. Omit it only for genuinely cross-task work.</li>
+        <li><code>--because WORDS</code> records why the task needs this role.</li>
+        <li><code>--runner NAME</code> chooses the runner; otherwise the installed configured default is used.</li>
+      </ul></div>
+      <div class="command"><pre>randcomp role assign ADDRESS --assignment WORDS... [--continue] [--company PATH]</pre><p>Change an agent’s assignment. A different piece of work is refused because one agent session owns one assignment. <code>--continue</code> explicitly says this is the same work described more clearly.</p></div>
+      <div class="command"><pre>randcomp role outcome --task SLUG [WORDS...] [--company PATH]</pre><p>Record the task’s concise outcome, produced paths, conclusions, and remaining work. Supplying no outcome words clears an incorrect outcome.</p></div>
+      <div class="command"><pre>randcomp role list [--all] [--company PATH]</pre><p>List the hired roster and what is running. <code>--all</code> includes retired hires. <code>role roster</code> is equivalent.</p></div>
+      <div class="command"><pre>randcomp role retire ADDRESS [--company PATH]</pre><p>Stop listing a hire as active. Its recorded history is retained.</p></div>
+      <div class="command"><pre>randcomp role import PATH [OPTIONS]</pre><p>Translate an existing skill, agent, GPT export, <code>AGENTS.md</code>, or Markdown definition into a RandComp Studio role package. <code>PATH</code> may be a file, a containing directory, or <code>-</code> for stdin.</p><ul>
+        <li><code>--as NAME</code> overrides the inferred role name.</li>
+        <li>Without <code>--add</code>, it writes nothing and prints the proposed package for review.</li>
+        <li><code>--add</code> copies the translation into <code>role-library/&lt;name&gt;/</code> and generates <code>roles/&lt;NAME&gt;.md</code>. It never edits the source or overwrites an existing role.</li>
+        <li><code>--anyway</code> permits writing despite non-fatal missing information; it cannot override a missing name, missing mission, or overwrite refusal.</li>
+      </ul></div>
+
+      <h3>Role sessions and runners</h3>
+      <div class="command"><pre>randcomp role runners [--company PATH]</pre><p>List every configured runner, whether it is installed and signed in, and which runner is the default.</p></div>
+      <div class="command"><pre>randcomp role coordinator [--use NAME | --default] [--company PATH]</pre><p>With no option, show the runner used for new coordinators. <code>--use</code> remembers a new choice. <code>--default</code> forgets that choice and returns to the runner table’s default. Existing coordinator sessions are unchanged.</p></div>
+      <div class="command"><pre>randcomp role runs-on ADDRESS [--use NAME] [--wait SECONDS] [--company PATH]</pre><p>Show one agent’s runner. <code>--use</code> moves it to another runner. If it is live, RandComp Studio requests and verifies a handover before replacing anything; <code>--wait</code> sets the handover deadline, using the runtime default when omitted.</p></div>
+      <div class="command"><pre>randcomp role launch ADDRESS [--let-it-work-without-asking] [--company PATH]</pre><p>Give a hired agent a session. The unattended flag is an explicit safety-boundary reduction and is refused if that runner has no defined unattended mode.</p></div>
+      <div class="command"><pre>randcomp role stop ADDRESS [--company PATH]
+randcomp role attach ADDRESS [--company PATH]</pre><p><code>stop</code> ends the session but keeps the hire. Role-level <code>attach</code> prints the command that joins the session; the noun-first <code>agent attach</code> command joins it directly.</p></div>
+      <div class="command"><pre>randcomp role replace ADDRESS [--wait SECONDS] [--let-it-work-without-asking] [--company PATH]</pre><p>Ask a live agent for a handover, verify it, retire the old session, and start a fresh continuation. If the handover misses the timeout, the old session is left exactly as it was.</p></div>
+      <div class="command"><pre>randcomp role at-once [HOW_MANY] [--company PATH]</pre><p>Show or set how many specialist agents on each task may run simultaneously. Extra hires wait their turn. The task coordinator is not counted. The old <code>at-most</code> command was removed and only explains its replacement.</p></div>
+      <div class="command"><pre>randcomp role check ADDRESS [--company PATH]
+randcomp role history ADDRESS [--company PATH]</pre><p><code>check</code> takes everything waiting from an agent’s inbox. <code>history</code> shows every session that hire has had and the succession between sessions.</p></div>
+
+      <h3>Role messages</h3>
+      <div class="command"><pre>randcomp role say ADDRESS TEXT... [--about TASK_ID] [--company PATH]</pre><p>Send a founder-authored message. <code>--about</code> disambiguates the task when writing to the cross-task coordinator.</p></div>
+      <div class="command"><pre>randcomp role send --to ADDRESS --from NAME [--as-founder] TEXT... [--company PATH]</pre><p>Send a message from one role to another. <code>--from</code> records the truthful sender; <code>--as-founder</code> explicitly marks the message as founder-authored.</p></div>
+      <div class="command"><pre>randcomp role route [--company PATH]</pre><p>Deliver everything currently waiting in the role outbox.</p></div>
+      <div class="command"><pre>randcomp role read ADDRESS [--lines N] [--company PATH]</pre><p>Read the full live scrollback or saved conversation. <code>--lines N</code> limits only live scrollback; completed conversations are always shown whole.</p></div>
+      <div class="command"><pre>randcomp role inbox [ADDRESS] [--company PATH]</pre><p>Show unread messages for one recipient, or for every recipient when the address is omitted.</p></div>
+
+      <h3>Company status and the window</h3>
+      <div class="command"><pre>randcomp status [--json] [--company PATH]</pre><p>Print the selected runner and sign-in state, task and agent counts, then one concise line for each. <code>--json</code> returns structured output.</p></div>
+      <div class="command"><pre>randcomp [--company PATH] [--no-model]</pre><p>With nothing after it, open your company in a window of its own, served only to <code>127.0.0.1</code>. <code>--no-model</code> disables the optional local-model paragraph.</p></div>
+      <div class="command"><pre>randcomp help
+randcomp COMMAND --help</pre><p>Print the complete command map, or the parser help for one command.</p></div>
+
+      <h3>Colour</h3>
+      <div class="command"><pre>randcomp COMMAND --no-color</pre><p>Every command paints four things when — and only when — a person is reading it: the state a piece of work is in, the words you copy off the screen, the headings, and the context lines it dims to make the rest findable. Piped, redirected, or read by an agent, the output is plain text byte for byte. <code>--no-color</code> works on every command; <code>NO_COLOR</code> and <code>FORCE_COLOR</code> are honoured as well.</p></div>
+
+      <h3>Older spellings</h3>
+      <p>The grammar above is the one to learn. Every spelling this tool has ever answered to still runs, unchanged, so nothing already written down breaks:</p>
+      <table><tbody>
+        <tr><td><code>task create</code>, <code>do</code>, <code>dispatch</code></td><td><code>tasks new</code></td></tr>
+        <tr><td><code>task list</code></td><td><code>tasks ls</code></td></tr>
+        <tr><td><code>task results</code>, <code>results</code></td><td><code>tasks TASK_ID</code></td></tr>
+        <tr><td><code>task show</code>, <code>show</code></td><td><code>tasks RESULT_FILE_PATH</code></td></tr>
+        <tr><td><code>task finish</code>, <code>finish</code>, <code>reopen</code></td><td><code>tasks TASK_ID finish</code> / <code>reopen</code></td></tr>
+        <tr><td><code>agent list</code></td><td><code>tasks TASK_ID agents</code></td></tr>
+        <tr><td><code>agent logs/send/attach/start/stop</code>, <code>read</code>, <code>say</code>, <code>attach</code>, <code>start</code>, <code>stop</code></td><td><code>agents AGENT_ID logs</code> and the rest</td></tr>
+        <tr><td><code>role library</code>, <code>roles</code></td><td>Folded into <code>role list</code> and <code>role import</code></td></tr>
+        <tr><td><code>role add</code></td><td><code>role hire</code></td></tr>
+        <tr><td><code>app</code>, <code>ui</code></td><td>Bare <code>randcomp</code></td></tr>
+        <tr><td><code>inbox</code>, <code>handoff</code>, <code>todo add/note/done</code></td><td>No longer part of the taught surface; still runnable</td></tr>
+      </tbody></table>
+    </section>
+
+    <section class="doc-section" id="roles">
+      <p class="eyebrow">Execution</p>
+      <h2>Roles and runners</h2>
+      <p>A role is the interface; a runner is the installed program that executes it. Two agents of one role may use different runners.</p>
+<pre>randcomp role runners
+randcomp role coordinator --use NAME
+randcomp role runs-on AGENT_ID --use NAME
+randcomp role at-once NUMBER</pre>
+      <p><code>coordinator --use</code> changes the runner for coordinators started from then on. <code>runs-on</code> moves one agent to a runner. <code>at-once</code> controls how many specialist agents on each task run simultaneously; extra agents remain hired and wait their turn.</p>
+      <p>RandComp Studio ships its first runner definitions for Claude Code, Codex CLI, and Kimi Code. They are initial integrations, not the product definition. Advanced users can add or override runners in <code>~/.config/mission-control/runners.json</code> without modifying the product, and additional built-in runners are the next compatibility step.</p>
+      <h3>Reuse existing skills and agents</h3>
+      <p>RandComp Studio is not a replacement marketplace. Its importer accepts a role definition you already have—such as an Agent Skill, Claude agent or skill, exported GPT, or plain Markdown—and translates it into the local role-package contract.</p>
+<pre>randcomp role import ROLE_SOURCE_PATH
+randcomp role import ROLE_SOURCE_PATH --add</pre>
+      <p>The first command is a review: it prints what was understood, what the role would become, and whether its matching rules can actually select it. Nothing is written without <code>--add</code>. The source path is read-only; the approved translation is copied into your company’s <code>role-library/</code>.</p>
+    </section>
+
+    <section class="doc-section" id="files">
+      <p class="eyebrow">Local by design</p>
+      <h2>Files, privacy, and boundaries</h2>
+      <ul>
+        <li>The UI server binds only to <code>127.0.0.1</code>.</li>
+        <li>RandComp Studio has no hosted account, telemetry service, or model API key of its own.</li>
+        <li>Your command-line AI agent still communicates with its own vendor under that tool’s settings and privacy policy.</li>
+        <li>The company folder contains readable roles, task files, status, messages, and artifacts.</li>
+        <li>Local application state lives under <code>~/.config/mission-control</code> by default. Set <code>MISSION_CONTROL_HOME</code> to override it.</li>
+        <li>RandComp Studio checks only whether a runner’s sign-in marker exists. Credential values never reach the page, logs, or status files.</li>
+      </ul>
+      <div class="warning callout"><strong>Project-folder access is real access.</strong><p>Agents read and modify the project folder through the command-line AI agent you selected. Its approval and sandbox settings determine what the agent may do.</p></div>
+    </section>
+
+    <section class="doc-section" id="cost-control">
+      <p class="eyebrow">Sessions spend</p>
+      <h2>Control cost and autonomy</h2>
+      <p>Hiring an agent writes a durable record. Starting its session is the step that can spend money. RandComp Studio keeps those concepts separate.</p>
+      <ul>
+        <li>Every task gets its own coordinator when dispatched.</li>
+        <li>The default per-task pace is three specialist agents running together; the coordinator is not counted.</li>
+        <li>Agents beyond the pace wait their turn instead of being refused.</li>
+        <li>Queued agents only advance while the app’s courier is running; the UI explains when closing the app prevents the next turn.</li>
+        <li>Finishing a task stops all its sessions. Reopening does not restart them.</li>
+        <li>Unattended permission modes are explicit and runner-specific. Enable them only after reading what the chosen runner permits.</li>
+      </ul>
+    </section>
+
+    <section class="doc-section" id="troubleshooting">
+      <p class="eyebrow">Common problems</p>
+      <h2>Troubleshooting</h2>
+      <h3><code>randcomp: command not found</code></h3>
+      <p>Add <code>~/.local/bin</code> to your PATH. The installer prints the exact line for your shell.</p>
+<pre>export PATH="$HOME/.local/bin:$PATH"</pre>
+      <h3>Python is too old</h3>
+      <p>This applies to a source install only — the application carries its own Python. From source, RandComp Studio requires Python 3.11 because it reads TOML runner configuration; on macOS, <code>brew install python</code> supplies a current version. You can also run:</p>
+<pre>MISSION_CONTROL_PYTHON=/path/to/python3 ./install.sh</pre>
+      <h3>No agent session starts</h3>
+      <p>The application carries its own <code>tmux</code>, so there is nothing to install for that. What it cannot carry is your command-line AI agent: confirm one is on your PATH and signed in with its own command — <code>randcomp status</code> says which it found and whether it is signed in. If you installed from source rather than the application, <code>tmux</code> does have to be on the machine. Then check:</p>
+<pre>randcomp status
+randcomp role runners</pre>
+      <h3>The wrong company opens</h3>
+      <p>The remembered company does not change with your current directory. Name another one deliberately with <code>--company PATH</code>.</p>
+      <h3>An agent is quiet or waiting</h3>
+      <p>Read the exact cause and its transcript before restarting it:</p>
+<pre>randcomp agent logs AGENT_ID
+randcomp agent attach AGENT_ID</pre>
+    </section>
+
+    <section class="doc-section" id="uninstall">
+      <p class="eyebrow">Housekeeping</p>
+      <h2>Move or uninstall</h2>
+      <h3>Move the unpacked folder</h3>
+      <p>The installed commands intentionally point to that folder. After moving it, run <code>./install.sh</code> again from the new location.</p>
+      <h3>Remove RandComp Studio</h3>
+<pre>rm ~/.local/bin/randcomp
+rm ~/.local/bin/randcomp-studio</pre>
+      <p>Then remove the unpacked product folder. Your company folder belongs to you and is left untouched.</p>
+    </section>
+
+    <footer>RandComp Studio documentation · derived from the current command surface and product contracts.</footer>
+  </main>
+</div>
+</body>
+</html>
